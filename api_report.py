@@ -146,7 +146,7 @@ if check_len_ttype == 0:
 if check_len_api == 0:
 	percentage = 0
 
-if check_len_cflow!=0 and check_len_ttype!=0 and percentage>=1:
+if cflow_per>=1 and ttype_per>=1 and percentage>=1:
 	getcontext().prec = 3
 	cflow_per = Decimal(cflow_per)
 	ttype_per = Decimal(ttype_per)
@@ -158,7 +158,7 @@ if check_len_cflow!=0 and check_len_ttype!=0 and percentage>=1:
 	gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
 	gen_report.write("<br/><center><font size='7'><b>" + overall_percentage_str + "</b></font></center>")
 
-if check_len_cflow!=0 and check_len_ttype!=0 and percentage<=0:
+if cflow_per>=1 and ttype_per>=1 and percentage<=0:
 	getcontext().prec = 3
 	cflow_per = Decimal(cflow_per)
 	ttype_per = Decimal(ttype_per)
