@@ -52,7 +52,10 @@ print "Passed: ", passed
 print "Failed: ", failed
 getcontext().prec = 3
 #percentage = Decimal(passed) / Decimal(testcases) * 100  ---------------------old code 
-percentage = passed/testcases #new code added in replace to the code in line above.
+
+percentage = Decimal(passed) / Decimal(testcases) #new code added in replace to the code in line above.
+
+
 totalper = str(percentage) + '%'
 gen_report.write("</table><table align='center'> <tr><td><h3>Passed: " + totalper + "</h3></td></tr> </table>")
 
@@ -113,16 +116,12 @@ for gettime in opentime:
 #new code for computation (normal average)
 check_len_cflow = len(cflow_per)
 check_len_ttype = len(ttype_per)
-percentage = in
-check_len_api = len(percentage)
 if check_len_cflow == 0:
 	cflow = 0
 if check_len_ttype == 0:
 	ttype = 0
-if check_len_api == 0:
-	apirest = 0
 
-if check_len_clow!=0 and check_len_ttype!=0 and check_len_api!=0:
+if check_len_clow!=0 and check_len_ttype!=0:
 	getcontext().prec = 3
 	overallsum = cflow_per + ttype_per + percentage / 3
 	overall_percentage = Decimal(overallsum)
