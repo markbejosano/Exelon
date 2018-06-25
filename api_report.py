@@ -121,7 +121,7 @@ if check_len_cflow == 0:
 if check_len_ttype == 0:
 	ttype = 0
 
-if check_len_clow!=0 and check_len_ttype!=0:
+if check_len_cflow!=0 and check_len_ttype!=0:
 	getcontext().prec = 3
 	overallsum = cflow_per + ttype_per + percentage / 3
 	overall_percentage = Decimal(overallsum)
