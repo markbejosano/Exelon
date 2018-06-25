@@ -15,6 +15,7 @@ gettestcases = set()
 check_file = os.path.isfile("HTTPRequest.jtl")
 check_file = str(check_file)
 if check_file=="True":
+	print "TRUEE"
 	print check_file
 
 	jtl = open("HTTPRequest.jtl", "r")
@@ -116,6 +117,7 @@ for extractor in gettestcases:
 
 
 
+
 endtime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')#time
 opentime = open("writetime.txt", "r")
 for gettime in opentime:
@@ -123,33 +125,39 @@ for gettime in opentime:
 		starttime = gettime[12:].strip()
 	if "Call flow Percentage" in gettime:
 		cflow_per = gettime[22:].replace('%','').strip()
-	else:
-		cflow_per = 0
 	if "TransferType Percentage" in gettime:
 		ttype_per = gettime[25:].replace('%','').strip()
-	else:
-		ttype_per = 0
 
 #new code for computation (normal average)
+check_len_cflow = len(cflow_per)
+check_len_ttype = len(ttype_per)
+percentage_temp_str = str(percentage)
+check_len_api = len(percentage_temp_str)
+if check_len_cflow == 0:
+	cflow_per = 0
+if check_len_ttype == 0:
+	ttype_per = 0
+if check_len_api == 0:
+	percentage = 0
 
-if cflow_per>=1 and ttype_per>=1 and percentage>=1:
+if check_len_cflow!=0 and check_len_ttype!=0 and percentage>=1:
 	getcontext().prec = 3
 	cflow_per = Decimal(cflow_per)
 	ttype_per = Decimal(ttype_per)
 	percentage = Decimal(percentage)
-	print "CHECK2 CHECK2 CHECK2: ", cflow_per, ttype_per, percentage
+	print "CHECK CHECK CHECK: ", cflow_per, ttype_per, percentage
 	overallsum = cflow_per + ttype_per + percentage 
 	overall_percentage = Decimal(overallsum) / 3
 	overall_percentage_str = str(overall_percentage) + '%'
 	gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
 	gen_report.write("<br/><center><font size='7'><b>" + overall_percentage_str + "</b></font></center>")
 
-if cflow_per>=1 and ttype_per>=1 and percentage<=0:
+if check_len_cflow!=0 and check_len_ttype!=0 and percentage<=0:
 	getcontext().prec = 3
 	cflow_per = Decimal(cflow_per)
 	ttype_per = Decimal(ttype_per)
 	percentage = Decimal(percentage)
-	print "CHECK3 CHECK3 CHECK3: ", cflow_per, ttype_per, percentage
+	print "CHECK CHECK CHECK: ", cflow_per, ttype_per, percentage
 	overallsum = cflow_per + ttype_per + percentage 
 	overall_percentage = Decimal(overallsum) / 2
 	overall_percentage_str = str(overall_percentage) + '%'
