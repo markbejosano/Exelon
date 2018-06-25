@@ -113,6 +113,7 @@ for gettime in opentime:
 #new code for computation (normal average)
 check_len_cflow = len(cflow_per)
 check_len_ttype = len(ttype_per)
+percentage = in
 check_len_api = len(percentage)
 if check_len_cflow == 0:
 	cflow = 0
