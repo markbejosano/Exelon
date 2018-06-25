@@ -127,12 +127,25 @@ if __name__ == "__main__":
     print "TEST CASES: ", testcases
     if exec_counter == testcases:
         getcontext().prec = 3
-        percentage = Decimal(overall_passed) / Decimal(testcases) * 100
-        totalper = str(percentage) + '%'
-        gen_report.write(
-            "</table><table align='center'> <tr><td><h3>Passed: " + totalper + "</h3></td></tr> </table>")
-        writetime = open("writetime.txt","a")
-        writetime.write("TransferType Percentage= " + totalper + "\n")
+        print "OVERALL PASSED", overall_passed
+        print "TEST CASES", testcases
+        #new added code ----------
+        if overall_passed<=0 and testcases<=0:
+            overall_passed = 0
+            testcases = 0
+            percentage = 0
+            totalper = "N/A"
+            gen_report.write(
+                "</table><table align='center'> <tr><td><h3>Passed: " + totalper + "</h3></td></tr> </table>")
+        else:
+        #end of new added code ----
+            percentage = Decimal(overall_passed) / Decimal(testcases) * 100
+            totalper = str(percentage) + '%'
+            gen_report.write(
+                "</table><table align='center'> <tr><td><h3>Passed: " + totalper + "</h3></td></tr> </table>")
+            writetime = open("writetime.txt","a")
+            writetime.write("TransferType Percentage= " + totalper + "\n")
+            
     if failed == 1:
         print"\n\n\n"
         raise SystemError('One of the Test Cases Failed')
