@@ -13,6 +13,7 @@ failed = 0
 gettestcases = set()
 
 check_file = os.path.isfile("HTTPRequest.jtl")
+check_file = str(check_file)
 if check_file=="True":
 	print "TRUEE"
 	print check_file
