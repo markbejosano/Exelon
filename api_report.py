@@ -12,60 +12,64 @@ passed = 0
 failed = 0
 gettestcases = set()
 
-if os.path.isfile('HTTPRequest.jtl","r"): #new added code
+check_file = os.path.isfile("HTTPRequest.jtl")
+if check_file=="True":
 
-jtl = open("HTTPRequest.jtl", "r")
-for line in jtl:
-	if "lb" in line:
-		line = line.replace('</httpSample>','').strip()
-		gettestcases.add(line)
-		
-print '\n'.join(gettestcases)
-testcases = len(gettestcases)
+	jtl = open("HTTPRequest.jtl", "r")
+	for line in jtl:
+		if "lb" in line:
+			line = line.replace('</httpSample>','').strip()
+			gettestcases.add(line)
 
-y = 1
-for results in gettestcases:		
-	if ('rc="200"' in results) and ('rm="OK"' in results):
-		endvalue = results.find("lb=") 
-		endvalue2 = results.find("rc")
-		strtvalue = results.rfind('', 0, endvalue)
-		strtvalue2 = results.rfind('', 0, endvalue2)
-		getapi = results[strtvalue:strtvalue2].replace('lb=','').replace('"','')
-		print "TEST CASE:", y,   "   ", getapi,  "Passed"
-		getapi = str(getapi)
-		y = str(y)
-		gen_report.write("<tr><td align='center'>" + y + "</td><td>" + getapi + "</td> <td bgcolor='#99e26f'>Passed </td></tr>")
-		passed+=1
-		y = int(y)
-		y+=1
-	else:
-		endvalue = results.find("lb=") 
-		endvalue2 = results.find("rc")
-		strtvalue = results.rfind('', 0, endvalue)
-		strtvalue2 = results.rfind('', 0, endvalue2)
-		getapi = results[strtvalue:strtvalue2].replace('lb=','').replace('"','')
-		print "TEST CASE:", y,   "   ", getapi,  "Failed"
-		getapi = str(getapi)
-		y = str(y)
-		gen_report.write("<tr><td align='center'>" + y + "</td><td>" + getapi + "</td> <td bgcolor='#e06745'>Failed </td></tr>")
-		failed+=1
-		y = int(y)
-		y+=1
-		
-print "Passed: ", passed
-print "Failed: ", failed
-getcontext().prec = 3
-percentage = Decimal(passed) / Decimal(testcases) * 100 
-totalper = str(percentage) + '%'
-gen_report.write("</table><table align='center'> <tr><td><h3>Passed: " + totalper + "</h3></td></tr> </table>")
+	print '\n'.join(gettestcases)
+	testcases = len(gettestcases)
 
-#new added code for api computation if nonee====================
-else: 
-getcontext().prec = 3
-percentage = 0
-totalper = str(percentage) + '%'		  
-gen_report.write("</table><table align='center'> <tr><td><h3>Passed: " + totalper + "</h3></td></tr> </table>")	
-		   #end code
+	y = 1
+	for results in gettestcases:		
+		if ('rc="200"' in results) and ('rm="OK"' in results):
+			endvalue = results.find("lb=") 
+			endvalue2 = results.find("rc")
+			strtvalue = results.rfind('', 0, endvalue)
+			strtvalue2 = results.rfind('', 0, endvalue2)
+			getapi = results[strtvalue:strtvalue2].replace('lb=','').replace('"','')
+			print "TEST CASE:", y,   "   ", getapi,  "Passed"
+			getapi = str(getapi)
+			y = str(y)
+			gen_report.write("<tr><td align='center'>" + y + "</td><td>" + getapi + "</td> <td bgcolor='#99e26f'>Passed </td></tr>")
+			passed+=1
+			y = int(y)
+			y+=1
+		else:
+			endvalue = results.find("lb=") 
+			endvalue2 = results.find("rc")
+			strtvalue = results.rfind('', 0, endvalue)
+			strtvalue2 = results.rfind('', 0, endvalue2)
+			getapi = results[strtvalue:strtvalue2].replace('lb=','').replace('"','')
+			print "TEST CASE:", y,   "   ", getapi,  "Failed"
+			getapi = str(getapi)
+			y = str(y)
+			gen_report.write("<tr><td align='center'>" + y + "</td><td>" + getapi + "</td> <td bgcolor='#e06745'>Failed </td></tr>")
+			failed+=1
+			y = int(y)
+			y+=1
+			
+	print "Passed: ", passed
+	print "Failed: ", failed
+	getcontext().prec = 3
+	percentage = Decimal(passed) / Decimal(testcases) * 100 
+	totalper = str(percentage) + '%'
+	gen_report.write("</table><table align='center'> <tr><td><h3>Passed: " + totalper + "</h3></td></tr> </table>")
+			
+else:	
+	getcontext().prec = 3
+	percentage = 0
+	totalper = str(percentage) + '%'		  
+	gen_report.write("</table><table align='center'> <tr><td><h3>Passed: " + totalper + "</h3></td></tr> </table>")	
+		  
+			
+			
+
+
 #api_result------------------------------------------------------------------------------==========================
 api_result = open("api_result.html","a")
 api_result.write("<center><h1>Inbound Build Acceptance Automation</h1> <h3>API</h3></center>")
@@ -132,7 +136,7 @@ if check_len_ttype == 0:
 if check_len_api == 0:
 	percentage = 0
 
-if check_len_cflow!=0 and check_len_ttype!=0:
+if check_len_cflow!=0 and check_len_ttype!=0 and percentage>=1:
 	getcontext().prec = 3
 	cflow_per = Decimal(cflow_per)
 	ttype_per = Decimal(ttype_per)
@@ -140,6 +144,18 @@ if check_len_cflow!=0 and check_len_ttype!=0:
 	print "CHECK CHECK CHECK: ", cflow_per, ttype_per, percentage
 	overallsum = cflow_per + ttype_per + percentage 
 	overall_percentage = Decimal(overallsum) / 3
+	overall_percentage_str = str(overall_percentage) + '%'
+	gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
+	gen_report.write("<br/><center><font size='7'><b>" + overall_percentage_str + "</b></font></center>")
+
+if check_len_cflow!=0 and check_len_ttype!=0 and percentage<=0:
+	getcontext().prec = 3
+	cflow_per = Decimal(cflow_per)
+	ttype_per = Decimal(ttype_per)
+	percentage = Decimal(percentage)
+	print "CHECK CHECK CHECK: ", cflow_per, ttype_per, percentage
+	overallsum = cflow_per + ttype_per + percentage 
+	overall_percentage = Decimal(overallsum) / 2
 	overall_percentage_str = str(overall_percentage) + '%'
 	gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
 	gen_report.write("<br/><center><font size='7'><b>" + overall_percentage_str + "</b></font></center>")
