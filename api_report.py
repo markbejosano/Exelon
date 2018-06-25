@@ -122,14 +122,19 @@ if check_len_cflow!=0 and check_len_ttype!=0:
 	cflow_per = Decimal(cflow_per)
 	ttype_per = Decimal(ttype_per)
 	percentage = Decimal(percentage)
-	overallsum = cflow_per + ttype_per + percentage / 3
-	overall_percentage = Decimal(overallsum)
+	print "CHECK CHECK CHECK: ", cflow_per, ttype_per, percentage
+	overallsum = cflow_per + ttype_per + percentage 
+	overall_percentage = Decimal(overallsum) / 3
 	overall_percentage_str = str(overall_percentage) + '%'
 	gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
 	gen_report.write("<br/><center><font size='7'><b>" + overall_percentage_str + "</b></font></center>")
+	
+if overall_percentage_str >= 75:
+	gen_report.write("<table align='center'><tr><td bgcolor='#99e26f'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;<font size='4'><b>PASSED</b></font></table><br/>")
+else:
+	gen_report.write("<table align='center'><tr><td bgcolor='#e06745'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;<font size='4'><b>FAILED</b></font></table><br/>")
 #end of new code------------------
-	
-	
+		
 #old code (weighted average computation)
 #getcontext().prec = 3
 #cflow_weight_val = 0.30
@@ -146,10 +151,10 @@ if check_len_cflow!=0 and check_len_ttype!=0:
 #gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
 #gen_report.write("<br/><center><font size='7'><b>" + overall_weighted_str + "</b></font></center>")
 
-if overall_weighted >= 75:
-	gen_report.write("<table align='center'><tr><td bgcolor='#99e26f'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;<font size='4'><b>PASSED</b></font></table><br/>")
-else:
-	gen_report.write("<table align='center'><tr><td bgcolor='#e06745'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;<font size='4'><b>FAILED</b></font></table><br/>")
+#if overall_weighted >= 75:
+#	gen_report.write("<table align='center'><tr><td bgcolor='#99e26f'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;<font size='4'><b>PASSED</b></font></table><br/>")
+#else:
+#	gen_report.write("<table align='center'><tr><td bgcolor='#e06745'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;<font size='4'><b>FAILED</b></font></table><br/>")
 	
 gen_report.write("<table align='center' border='1' width='35%'> <tr><td> <b>Start Time:</b></td> <td>" + starttime +  "</td></tr>"
 		 "<tr><td><b>End Time:</b></td> <td>" + endtime + "</td></tr>"
