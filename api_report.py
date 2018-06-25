@@ -15,7 +15,6 @@ gettestcases = set()
 check_file = os.path.isfile("HTTPRequest.jtl")
 check_file = str(check_file)
 if check_file=="True":
-	print "TRUEE"
 	print check_file
 
 	jtl = open("HTTPRequest.jtl", "r")
@@ -114,7 +113,6 @@ for extractor in gettestcases:
 		cc = int(cc)
 		cc+=1
 #api_result------------------------------------------------------------------------------=============================
-
 
 
 
