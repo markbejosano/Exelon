@@ -113,12 +113,14 @@ for gettime in opentime:
 check_len_cflow = len(cflow_per)
 check_len_ttype = len(ttype_per)
 if check_len_cflow == 0:
-	cflow = 0
+	cflow_per = 0
 if check_len_ttype == 0:
-	ttype = 0
+	ttype_per = 0
 
 if check_len_cflow!=0 and check_len_ttype!=0:
 	getcontext().prec = 3
+	cflow_per = Decimal(cflow_per)
+	ttype_per = Decimal(ttype_per)
 	percentage = Decimal(percentage)
 	overallsum = cflow_per + ttype_per + percentage / 3
 	overall_percentage = Decimal(overallsum)
