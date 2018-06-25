@@ -109,20 +109,42 @@ for gettime in opentime:
 	if "TransferType Percentage" in gettime:
 		ttype_per = gettime[25:].replace('%','').strip()
 
-getcontext().prec = 3
-cflow_weight_val = 0.30
-trans_weight_val = 0.20
-api_weight_val = 0.50
-cflow_percentage = Decimal(cflow_per) * Decimal(cflow_weight_val)
-ttype_percentage = Decimal(ttype_per) * Decimal(trans_weight_val)
-api_percentage = Decimal(percentage) * Decimal(api_weight_val)
-print "Call Flow PERCENTAGE: ", cflow_percentage
-print "Transfer Term PERCENTAGE: ", ttype_percentage
-print "API PERCENTAGE ", api_percentage
-overall_weighted = Decimal(cflow_percentage) + Decimal(ttype_percentage) + Decimal(api_percentage)
-overall_weighted_str = str(overall_weighted) + '%'
-gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
-gen_report.write("<br/><center><font size='7'><b>" + overall_weighted_str + "</b></font></center>")
+#new code for computation (normal average)
+check_len_cflow = len(cflow_per)
+check_len_ttype = len(ttype_per)
+check_len_api = len(percentage)
+if check_len_cflow == 0:
+	cflow = 0
+if check_len_ttype == 0:
+	ttype = 0
+if check_len_api == 0:
+	apirest = 0
+
+if check_len_clow!=0 and check_len_ttype!=0 and check_len_api!=0:
+	getcontext().prec = 3
+	overallsum = cflow_per + ttype_per + percentage / 3
+	overall_percentage = Decimal(overallsum)
+	overall_percentage_str = str(overall_percentage) + '%'
+	gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
+	gen_report.write("<br/><center><font size='7'><b>" + overall_weighted_str + "</b></font></center>")
+#end of new code------------------
+	
+	
+#old code (weighted average computation)
+#getcontext().prec = 3
+#cflow_weight_val = 0.30
+#trans_weight_val = 0.20
+#api_weight_val = 0.50
+#cflow_percentage = Decimal(cflow_per) * Decimal(cflow_weight_val)
+#ttype_percentage = Decimal(ttype_per) * Decimal(trans_weight_val)
+#api_percentage = Decimal(percentage) * Decimal(api_weight_val)
+#print "Call Flow PERCENTAGE: ", cflow_percentage
+#print "Transfer Term PERCENTAGE: ", ttype_percentage
+#print "API PERCENTAGE ", api_percentage
+#overall_weighted = Decimal(cflow_percentage) + Decimal(ttype_percentage) + Decimal(api_percentage)
+#overall_weighted_str = str(overall_weighted) + '%'
+#gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
+#gen_report.write("<br/><center><font size='7'><b>" + overall_weighted_str + "</b></font></center>")
 
 if overall_weighted >= 75:
 	gen_report.write("<table align='center'><tr><td bgcolor='#99e26f'>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;<font size='4'><b>PASSED</b></font></table><br/>")
