@@ -14,6 +14,8 @@ gettestcases = set()
 
 check_file = os.path.isfile("HTTPRequest.jtl")
 if check_file=="True":
+	print "TRUEE"
+	print check_file
 
 	jtl = open("HTTPRequest.jtl", "r")
 	for line in jtl:
