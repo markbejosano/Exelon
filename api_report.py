@@ -51,7 +51,7 @@ for results in gettestcases:
 print "Passed: ", passed
 print "Failed: ", failed
 getcontext().prec = 3
-percentage = Decimal(passed) / Decimal(testcases) * 100  ---------------------old code 
+percentage = Decimal(passed) / Decimal(testcases) * 100 
 totalper = str(percentage) + '%'
 gen_report.write("</table><table align='center'> <tr><td><h3>Passed: " + totalper + "</h3></td></tr> </table>")
 
@@ -124,7 +124,7 @@ if check_len_cflow!=0 and check_len_ttype!=0:
 	overall_percentage = Decimal(overallsum)
 	overall_percentage_str = str(overall_percentage) + '%'
 	gen_report.write("<html><table align='center' border='1' width='80%'> </table>")
-	gen_report.write("<br/><center><font size='7'><b>" + overall_weighted_str + "</b></font></center>")
+	gen_report.write("<br/><center><font size='7'><b>" + overall_percentage_str + "</b></font></center>")
 #end of new code------------------
 	
 	
