@@ -112,10 +112,14 @@ for gettime in opentime:
 #new code for computation (normal average)
 check_len_cflow = len(cflow_per)
 check_len_ttype = len(ttype_per)
+percentage_temp_str = str(percentage)
+check_len_api = len(percentage_temp_str)
 if check_len_cflow == 0:
 	cflow_per = 0
 if check_len_ttype == 0:
 	ttype_per = 0
+if check_len_api == 0:
+	percentage = 0
 
 if check_len_cflow!=0 and check_len_ttype!=0:
 	getcontext().prec = 3
