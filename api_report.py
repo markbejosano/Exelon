@@ -133,25 +133,13 @@ for gettime in opentime:
 		ttype_per = 0
 
 #new code for computation (normal average)
-cflow_per = str(cflow_per)
-ttype_per = str(ttype_per)
-check_len_cflow = len(cflow_per)
-check_len_ttype = len(ttype_per)
-percentage_temp_str = str(percentage)
-check_len_api = len(percentage_temp_str)
-if check_len_cflow == 0:
-	cflow_per = 0
-if check_len_ttype == 0:
-	ttype_per = 0
-if check_len_api == 0:
-	percentage = 0
 
 if cflow_per>=1 and ttype_per>=1 and percentage>=1:
 	getcontext().prec = 3
 	cflow_per = Decimal(cflow_per)
 	ttype_per = Decimal(ttype_per)
 	percentage = Decimal(percentage)
-	print "CHECK CHECK CHECK: ", cflow_per, ttype_per, percentage
+	print "CHECK2 CHECK2 CHECK2: ", cflow_per, ttype_per, percentage
 	overallsum = cflow_per + ttype_per + percentage 
 	overall_percentage = Decimal(overallsum) / 3
 	overall_percentage_str = str(overall_percentage) + '%'
@@ -163,7 +151,7 @@ if cflow_per>=1 and ttype_per>=1 and percentage<=0:
 	cflow_per = Decimal(cflow_per)
 	ttype_per = Decimal(ttype_per)
 	percentage = Decimal(percentage)
-	print "CHECK CHECK CHECK: ", cflow_per, ttype_per, percentage
+	print "CHECK3 CHECK3 CHECK3: ", cflow_per, ttype_per, percentage
 	overallsum = cflow_per + ttype_per + percentage 
 	overall_percentage = Decimal(overallsum) / 2
 	overall_percentage_str = str(overall_percentage) + '%'
